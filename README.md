@@ -26,3 +26,9 @@ Navigate to `ansible.ipynb` and run the cells.
 ```bash
 open http://localhost:8888/notebooks/ansible.ipynb
 ```
+
+Deactivate the virtual environment.
+
+```bash
+deactivate
+```

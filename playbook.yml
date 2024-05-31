@@ -1,0 +1,29 @@
+---
+- name: Get installed software
+  become: false
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: Get installed software on Debian
+      ansible.builtin.command: "dpkg-query --show --showformat='${Package} ${Version}\n'"
+      when: ansible_os_family == 'Debian'
+      register: output
+      changed_when: false
+
+    - name: Get installed software on macOS
+      ansible.builtin.command: "brew list --formula --versions"
+      when: ansible_os_family == 'Darwin'
+      changed_when: false
+      register: output
+      tags: qa
+
+    - debug:
+        msg: "{{ output.stdout_lines[:5] }}"
+      tags: qa
+
+    - name: Save installed software to file
+      ansible.builtin.shell: |
+        filename="installed_software_{{ ansible_nodename | lower }}_{{ ansible_os_family | lower }}.csv"
+        echo 'package,version' > $filename
+        awk '{print $1","$2}' <<< "{{ output.stdout }}" >> $filename
+      tags: qa

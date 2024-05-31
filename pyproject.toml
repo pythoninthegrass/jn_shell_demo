@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "jn-shell-demo"
+version = "0.1.0"
+description = ""
+authors = ["pythoninthegrass <4097471+pythoninthegrass@users.noreply.github.com>"]
+license = "Unlicense"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+ansible = "^9.6.0"
+ansible-lint = "^6.8.7"
+jupyter = "^1.0.0"
+
+[tool.poetry.group.dev.dependencies]
+ipython = "^8.23.0"
+poetry-plugin-export = "^1.7.1"
+poetry-plugin-up = "^0.7.1"
+rich = "^13.7.1"
+ruff = "^0.4.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
